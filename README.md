@@ -77,7 +77,6 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=...
 NEXT_PUBLIC_SANITY_DATASET=...
 # Preview mode
 SANITY_API_READ_TOKEN=...
-SANITY_STUDIO_PREVIEW_SECRET=...
 # On-demand revalidation
 SANITY_REVALIDATE_SECRET=
 ```
@@ -189,24 +188,10 @@ Wormhole into the [manager](https://manage.sanity.io/) by running `cd studio && 
 - The log should start showing calls.
 - And the published changes show up on the site after you reload.
 
-### Step 8. Deploy Sanity Studio
-
-Set the production URL in an env var so the Studio can create its "Open Preview" link correctly, for activating Preview Mode.
-
-```bash
-npx vercel env add SANITY_STUDIO_PRODUCTION_URL
-```
-
-Deploy the Studio to Sanity's CDN:
-
-```bash
-npm run studio:deploy
-```
-
 ### Next steps
 
 - Use Preview Mode to see the effect of image hotspot cropping, in [real](https://user-images.githubusercontent.com/81981/182700131-6f2deeb5-548e-4dd3-b041-8f89e96a0bac.png)-[time](https://user-images.githubusercontent.com/81981/182700249-95d6f045-dcb2-4acf-bd1e-3f1ecbe2980b.png).
 - Mount your preview inside the Sanity Studio for comfortable side-by-side editing
 - [Join the Sanity community](https://slack.sanity.io/)
 
-[vercel-deploy]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fcms-sanity&env=SANITY_STUDIO_PREVIEW_SECRET&envDescription=Any%20URL%20friendly%20value%20to%20secure%20Preview%20Mode&project-name=cms-sanity&repo-name=cms-sanity&demo-title=Blog%20using%20Next.js%20%26%20Sanity&demo-description=On-demand%20ISR%2C%20sub-second%20as-you-type%20previews&demo-url=https%3A%2F%2Fnext-blog-sanity.vercel.app%2F&demo-image=https%3A%2F%2Fuser-images.githubusercontent.com%2F110497645%2F182727236-75c02b1b-faed-4ae2-99ce-baa089f7f363.png&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx
+[vercel-deploy]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fcms-sanity&project-name=cms-sanity&repo-name=cms-sanity&demo-title=Blog%20using%20Next.js%20%26%20Sanity&demo-description=On-demand%20ISR%2C%20sub-second%20as-you-type%20previews&demo-url=https%3A%2F%2Fnext-blog-sanity.vercel.app%2F&demo-image=https%3A%2F%2Fuser-images.githubusercontent.com%2F110497645%2F182727236-75c02b1b-faed-4ae2-99ce-baa089f7f363.png&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx

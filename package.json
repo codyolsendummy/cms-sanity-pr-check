@@ -3,10 +3,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "studio:env": "(cd studio && npx @sanity/cli install) && cp .env studio/.env.development || cp .env.local studio/.env.development",
-    "studio:dev": "npm run studio:env && (cd studio && npx @sanity/cli start)",
-    "studio:deploy": "npx vercel env pull && npm run studio:env && (cd studio && npx @sanity/cli deploy)"
+    "start": "next start"
   },
   "dependencies": {
     "@portabletext/react": "^1.0.6",
