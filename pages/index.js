@@ -7,11 +7,15 @@ import Layout from '../components/layout'
 import NoStories from '../components/no-stories'
 import { CMS_NAME } from '../lib/constants'
 import { indexQuery } from '../lib/queries'
+import { usePreviewSubscription } from '../lib/sanity'
 import { getClient, overlayDrafts } from '../lib/sanity.server'
 
-export default function Index({ allPosts, preview }) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+export default function Index({ allPosts: initialAllPosts, preview }) {
+  const { data: allPosts } = usePreviewSubscription(indexQuery, {
+    initialData: initialAllPosts,
+    enabled: preview,
+  })
+  const [heroPost, ...morePosts] = allPosts || []
   return (
     <>
       <Layout preview={preview}>
