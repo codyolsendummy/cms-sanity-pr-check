@@ -4,6 +4,7 @@ import MoreStories from '../components/more-stories'
 import HeroPost from '../components/hero-post'
 import Intro from '../components/intro'
 import Layout from '../components/layout'
+import NoStories from '../components/no-stories'
 import { CMS_NAME } from '../lib/constants'
 import { indexQuery } from '../lib/queries'
 import { getClient, overlayDrafts } from '../lib/sanity.server'
@@ -19,7 +20,7 @@ export default function Index({ allPosts, preview }) {
         </Head>
         <Container>
           <Intro />
-          {heroPost && (
+          {heroPost ? (
             <HeroPost
               title={heroPost.title}
               coverImage={heroPost.coverImage}
@@ -28,6 +29,8 @@ export default function Index({ allPosts, preview }) {
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
             />
+          ) : (
+            <NoStories />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
         </Container>
