@@ -1,10 +1,34 @@
+import { createGlobalStyle } from 'styled-components'
 import Head from 'next/head'
 
-const config: any = {}
+import config from 'sanity.config'
+import {Studio, defaultTheme} from 'sanity'
+
+// Use the same bg colors as the studio
+const lightBg = defaultTheme.color.light.default.base.bg
+const darkBg = defaultTheme.color.dark.default.base.bg
+
+const StudioStyle = createGlobalStyle`
+html {
+  background-color: ${lightBg};
+  @media (prefers-color-scheme: dark) {
+    background-color: ${darkBg};
+  }
+}
+html,
+body,
+#__next {
+  height: 100%;
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}`
 
 export default function StudioPage() {
   return (
     <>
+    <Studio config={config} />
       <h1>Hi from studio!</h1>
       <Head>
         {/* Studio implements display cutouts CSS (The iPhone Notch ™ ) and needs `viewport-fit=covered` for it to work correctly */}
@@ -26,6 +50,7 @@ export default function StudioPage() {
           media="(prefers-color-scheme: dark)"
         />
       </Head>
+      <StudioStyle />
     </>
   )
 }

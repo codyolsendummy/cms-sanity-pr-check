@@ -50,7 +50,7 @@ npx vercel env pull
 
 #### You can also set them manually
 
-Run `cd studio && npx @sanity/cli init`. You'll then be able to select from existing projects. The CLI will update sanity.json with the project ID and dataset name.
+Run `cd studio && npx sanity init`. You'll then be able to select from existing projects. The CLI will update sanity.json with the project ID and dataset name.
 
 Copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
 
@@ -63,7 +63,7 @@ Then set these variables in `.env.local`:
 - `NEXT_PUBLIC_SANITY_PROJECT_ID` should be the `projectId` value from the `studio/sanity.json` file.
 - `NEXT_PUBLIC_SANITY_DATASET` should be the `dataset` value from the `studio/sanity.json` file.
 - `SANITY_API_READ_TOKEN` create an API token with `read-only` permissions:
-  - Run `cd studio && npx @sanity/cli manage` or go to https://manage.sanity.io/ and open your project.
+  - Run `cd studio && npx sanity manage` or go to https://manage.sanity.io/ and open your project.
   - Go to **API** and the **Tokens** section at the bottom, launch its **Add API token** button.
   - Name it **SANITY_API_READ_TOKEN**, set **Permissions** to **Viewer**.
   - Hit **Save** and you can copy/paste the token.
@@ -87,11 +87,10 @@ SANITY_REVALIDATE_SECRET=
 When starting Preview Mode an "is logged in" check is performed, and it requires CORS headers.
 
 ```bash
-cd studio
 # Next.js runs on port 3000 by default
-npx @sanity/cli cors add http://localhost:3000 --credentials
+npx sanity cors add http://localhost:3000 --credentials
 # If deploying to vercel were your first step let's add the production URL while at it
-npx @sanity/cli cors add https://next-blog-sanity.vercel.app/ --credentials
+npx sanity cors add https://next-blog-sanity.vercel.app/ --credentials
 ```
 
 ### Step 3. Run Next.js in development mode
@@ -151,7 +150,7 @@ Alternatively, you can deploy using our template by clicking on the Deploy butto
 Enable Preview Mode by adding the production URL to the deployment you made in [Step 5](#step-5-deploy-on-vercel):
 
 ```bash
-npx @sanity/cli cors add https://next-blog-sanity.vercel.app/ --credentials
+npx sanity cors add https://next-blog-sanity.vercel.app/ --credentials
 ```
 
 ### Step 7. Setup Revalidation Webhook
@@ -174,7 +173,7 @@ npx vercel env pull
 npx vercel --prod
 ```
 
-Wormhole into the [manager](https://manage.sanity.io/) by running `cd studio && npx @sanity/cli hook create`:
+Wormhole into the [manager](https://manage.sanity.io/) by running `cd studio && npx sanity hook create`:
 
 - **Name** it "On-demand Revalidation".
 - Set the **URL** to use the Vercel app url from [Step 5](#step-5-deploy-on-vercel) and append `/api/revalidate`, for example: `https://cms-sanity.vercel.app/api/revalidate`
