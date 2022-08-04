@@ -2,6 +2,7 @@ import { createConfig, Slug } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 
+import api from 'schemas/api'
 import author from 'schemas/author'
 import post from 'schemas/post'
 
@@ -16,7 +17,7 @@ export default createConfig({
   name: 'blog',
   title: 'Blog',
   plugins: [deskTool(), unsplashImageAsset()],
-  schema: { types: [author, post] },
+  schema: { types: [post, author, api] },
   document: {
     productionUrl: async (prev, { client, document }) => {
       // @TODO grab secret with client
