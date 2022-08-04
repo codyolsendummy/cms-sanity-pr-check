@@ -62,7 +62,7 @@ Then set these variables in `.env.local`:
 
 - `NEXT_PUBLIC_SANITY_PROJECT_ID` should be the `projectId` value from the `studio/sanity.json` file.
 - `NEXT_PUBLIC_SANITY_DATASET` should be the `dataset` value from the `studio/sanity.json` file.
-- `SANITY_API_READ_TOKEN` create an API token with `read-only` permissions:
+- `SANITY_API_WRITE_TOKEN` create an API token with `read-only` permissions:
   - Run `npx sanity manage` or go to https://manage.sanity.io/ and open your project.
   - Go to **API** and the **Tokens** section at the bottom, launch its **Add API token** button.
   - Name it **SANITY_API_READ_TOKEN**, set **Permissions** to **Viewer**.
@@ -75,8 +75,8 @@ Your `.env.local` file should look like this:
 # Connect to Content Lake
 NEXT_PUBLIC_SANITY_PROJECT_ID=...
 NEXT_PUBLIC_SANITY_DATASET=...
-# Preview mode
-SANITY_API_READ_TOKEN=...
+# Preview mode and on-demeand Revalidation
+SANITY_API_WRITE_TOKEN=...
 # On-demand revalidation
 SANITY_REVALIDATE_SECRET=
 ```

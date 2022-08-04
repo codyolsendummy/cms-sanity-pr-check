@@ -28,14 +28,18 @@ export default createConfig({
       const url = new URL('/api/preview', location.origin)
       url.searchParams.set('secret', secret)
 
-      switch (document._type) {
-        case post.name:
-          url.searchParams.set('slug', (document.slug as Slug).current!)
-          break
-        default:
-          return prev
+      try {
+        switch (document._type) {
+          case post.name:
+            url.searchParams.set('slug', (document.slug as Slug).current!)
+            break
+          default:
+            return prev
+        }
+        return url.toString()
+      } catch {
+        return prev
       }
-      return url.toString()
     },
   },
 })
