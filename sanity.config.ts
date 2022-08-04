@@ -1,4 +1,4 @@
-import { createConfig } from 'sanity'
+import { createConfig, Slug } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 
@@ -19,15 +19,23 @@ export default createConfig({
   schema: { types: [author, post] },
   document: {
     productionUrl: async (prev, { client, document }) => {
-      const secret = process.env.NEXT_PUBLIC_PREVIEW_SECRET
-      debugger
       // @TODO grab secret with client
+      const secret = process.env.NEXT_PUBLIC_PREVIEW_SECRET
+      if (!secret) {
+        console.warn('No preview secret set. Previews disabled.')
+        return prev
+      }
+      const url = new URL('/api/preview', location.origin)
+      url.searchParams.set('secret', secret)
+
       switch (document._type) {
         case post.name:
-          return `https://blog.${process.env.NEXT_PUBLIC_DOMAIN}/${document.slug}`
+          url.searchParams.set('slug', (document.slug as Slug).current!)
+          break
         default:
           return prev
       }
+      return url.toString()
     },
   },
 })
