@@ -1,5 +1,6 @@
 import { createConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 
 import schemaTypes from './schemas'
 
@@ -12,6 +13,6 @@ export default createConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  plugins: [deskTool()],
+  plugins: [deskTool(), unsplashImageAsset()],
   schema: { types: schemaTypes },
 })

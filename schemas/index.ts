@@ -1,3 +1,4 @@
 import author from './author'
+import post from './post'
 
-export default [author]
+export default [author, post]

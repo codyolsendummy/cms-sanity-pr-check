@@ -21,6 +21,10 @@ body {
   margin: 0;
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
+}
+/* override tailwind reset */
+:root svg {
+  display: inline;
 }`
 
 export default function StudioPage() {
