@@ -196,8 +196,6 @@ Set the production URL in an env var so the Studio can create its "Open Preview"
 
 ```bash
 npx vercel env add SANITY_STUDIO_PRODUCTION_URL
-# Update local .env
-npx vercel env pull
 ```
 
 Deploy the Studio to Sanity's CDN:
