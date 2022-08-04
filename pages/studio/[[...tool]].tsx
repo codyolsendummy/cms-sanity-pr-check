@@ -11,9 +11,6 @@ const darkBg = defaultTheme.color.dark.default.base.bg
 const StudioStyle = createGlobalStyle`
 html {
   background-color: ${lightBg};
-  @media (prefers-color-scheme: dark) {
-    background-color: ${darkBg};
-  }
 }
 html,
 body,
