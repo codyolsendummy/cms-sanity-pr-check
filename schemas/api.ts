@@ -4,6 +4,7 @@ export default defineType({
   name: 'api',
   title: 'API',
   type: 'document',
+  liveEdit: true,
   fieldsets: [
     {
       name: 'secrets',
