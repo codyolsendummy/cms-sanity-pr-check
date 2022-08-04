@@ -11,7 +11,7 @@ You'll get:
 
 ## Demo
 
-### [https://next-blog-sanity.vercel.app/](https://next-blog-sanity.vercel.app/)
+### [https://next-blog-sanity-studio.vercel.app/](https://next-blog-sanity-studio.vercel.app/)
 
 ## Deploy your own
 
@@ -63,11 +63,11 @@ Then set these variables in `.env.local`:
 - `NEXT_PUBLIC_SANITY_PROJECT_ID` should be the `projectId` value from the `studio/sanity.json` file.
 - `NEXT_PUBLIC_SANITY_DATASET` should be the `dataset` value from the `studio/sanity.json` file.
 - `SANITY_API_READ_TOKEN` create an API token with `read-only` permissions:
-  - Run `cd studio && npx sanity manage` or go to https://manage.sanity.io/ and open your project.
+  - Run `npx sanity manage` or go to https://manage.sanity.io/ and open your project.
   - Go to **API** and the **Tokens** section at the bottom, launch its **Add API token** button.
   - Name it **SANITY_API_READ_TOKEN**, set **Permissions** to **Viewer**.
   - Hit **Save** and you can copy/paste the token.
-- `SANITY_PREVIEW_SECRET` can be any URL friendly value you want (for example by running `Math.random().toString(36).substr(2, 10)`), it's sent as a query parameter to enable [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode).
+- `NEXT_PUBLIC_PREVIEW_SECRET` can be any URL friendly value you want (for example by running `Math.random().toString(36).substr(2, 10)`), it's sent as a query parameter to enable [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode).
 
 Your `.env.local` file should look like this:
 
@@ -81,15 +81,13 @@ SANITY_API_READ_TOKEN=...
 SANITY_REVALIDATE_SECRET=
 ```
 
-### Step 2. Add CORS origins for Preview Mode
-
-When starting Preview Mode an "is logged in" check is performed, and it requires CORS headers.
+### Step 2. Add CORS origins
 
 ```bash
 # Next.js runs on port 3000 by default
 npx sanity cors add http://localhost:3000 --credentials
 # If deploying to vercel were your first step let's add the production URL while at it
-npx sanity cors add https://next-blog-sanity.vercel.app/ --credentials
+npx sanity cors add https://next-blog-sanity-studio.vercel.app/ --credentials
 ```
 
 ### Step 3. Run Next.js in development mode
@@ -108,7 +106,7 @@ Your blog should be up and running on [http://localhost:3000](http://localhost:3
 
 ### Step 4. Populate content & try preview mode
 
-Run `npm run studio:dev` in another terminal and after the project has started and you have navigated to the URL given and you're ready to create some content.
+Open [/studio](http://localhost:3000/studio) and start creating some content:
 
 - Click on the "Create new document" button top left and select **Post**.
 - Type some dummy data for the **Title**.
@@ -146,10 +144,10 @@ Alternatively, you can deploy using our template by clicking on the Deploy butto
 
 ### Step 6. Add deployment URL to CORS origins
 
-Enable Preview Mode by adding the production URL to the deployment you made in [Step 5](#step-5-deploy-on-vercel):
+For the Sanity Studio to work you need to add the production URL to the deployment you made in [Step 5](#step-5-deploy-on-vercel) to the list over allowed origins:
 
 ```bash
-npx sanity cors add https://next-blog-sanity.vercel.app/ --credentials
+npx sanity cors add https://next-blog-sanity-studio.vercel.app/ --credentials
 ```
 
 ### Step 7. Setup Revalidation Webhook
@@ -166,13 +164,11 @@ Create a secret (for example by running `Math.random().toString(36).substr(2, 10
 
 ```bash
 npx vercel env add SANITY_REVALIDATE_SECRET
-# Update local .env
-npx vercel env pull
 # Apply the new env var in production
 npx vercel --prod
 ```
 
-Wormhole into the [manager](https://manage.sanity.io/) by running `cd studio && npx sanity hook create`:
+Wormhole into the [manager](https://manage.sanity.io/) by running `npx sanity hook create`:
 
 - **Name** it "On-demand Revalidation".
 - Set the **URL** to use the Vercel app url from [Step 5](#step-5-deploy-on-vercel) and append `/api/revalidate`, for example: `https://cms-sanity.vercel.app/api/revalidate`
@@ -194,4 +190,4 @@ Wormhole into the [manager](https://manage.sanity.io/) by running `cd studio && 
 - Mount your preview inside the Sanity Studio for comfortable side-by-side editing
 - [Join the Sanity community](https://slack.sanity.io/)
 
-[vercel-deploy]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fcms-sanity&project-name=cms-sanity&repo-name=cms-sanity&demo-title=Blog%20using%20Next.js%20%26%20Sanity&demo-description=On-demand%20ISR%2C%20sub-second%20as-you-type%20previews&demo-url=https%3A%2F%2Fnext-blog-sanity.vercel.app%2F&demo-image=https%3A%2F%2Fuser-images.githubusercontent.com%2F110497645%2F182727236-75c02b1b-faed-4ae2-99ce-baa089f7f363.png&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx
+[vercel-deploy]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fcms-sanity&project-name=cms-sanity&repo-name=cms-sanity&demo-title=Blog%20using%20Next.js%20%26%20Sanity&demo-description=On-demand%20ISR%2C%20sub-second%20as-you-type%20previews&demo-url=https%3A%2F%2Fnext-blog-sanity-studio.vercel.app%2F&demo-image=https%3A%2F%2Fuser-images.githubusercontent.com%2F110497645%2F182727236-75c02b1b-faed-4ae2-99ce-baa089f7f363.png&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx
